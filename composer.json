@@ -1,0 +1,21 @@
+{
+  "name": "adesa/smartlabel-client",
+  "description": "Place and manage orders of stickers using the SmartLabel webservices",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Laurent",
+      "email": "laurent@smartlabel.fr"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Adesa\\SmartLabelClient\\": "src/",
+      "Adesa\\SmartLabelClient\\Methods\\": "gen/"
+    }
+  },
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*"
+  }
+}

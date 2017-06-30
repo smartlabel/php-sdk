@@ -1,0 +1,9 @@
+locale = {fr|en|es|…}
+localeBasePath = ../locale
+identifiantRevendeur = {votre identifiant revendeur}
+cleAPI = {votre clé API}
+
+[FTP]
+host = adesaweb.adesa.fr
+login = {votre identifiant revendeur}
+password = {votre mot de passe FTP}
