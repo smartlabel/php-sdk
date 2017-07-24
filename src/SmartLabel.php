@@ -242,6 +242,7 @@ class SmartLabel
             $xmlEtat = $xml->MonEtatLiv;
 
             $suivi = new EtatDossier();
+            $suivi->numero = $numeroDossier;
             $suivi->code = intval((string)$xmlEtat->Livraison_Etat);
             $suivi->trackingURL = (string)$xmlEtat->Livraison_Tracking_Adresse;
             $suivi->informationsLivraison = (string)$xmlEtat->livraison_Info;

@@ -17,6 +17,7 @@ class EtatDossier
     const LIVRAISON = 3;
     const ERREUR_FICHIER = 4;
     
+    public $numero;
     public $trackingURL;
     public $code;
     public $informationsLivraison;
