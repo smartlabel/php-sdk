@@ -120,8 +120,7 @@ class SmartLabel
 
         $xml = $this->client->exec($method);
         $element = $xml->W2P_Scenario->Scenario;
-        $scenario = new \Adesa\SmartLabelClient\Scenario();
-        $scenario->numero = (string)$element["numero"];
+        $scenario = new \Adesa\SmartLabelClient\Scenario((string)$element["numero"]);
         $scenario->delai = (int)$element["delai"];
         $scenario->nom = (string)$element["nom"];
 
@@ -141,7 +140,7 @@ class SmartLabel
         $nombreRouleaux,
         $rotation, /*0 ; 90 ; 180 ; 270*/
         $quantitesParSerie,
-        $nombreSeries
+        $nombreSeries = null
     )
     {
         $method = new DemandePrix();
@@ -154,8 +153,8 @@ class SmartLabel
             ->nNbEtiqRouleaux($nombreEtiquettesParRouleau)
             ->nNbRouleaux($nombreRouleaux)
             ->nRotation($rotation)
-            ->nNbSeries($nombreSeries)
-            ->sQteparserie($quantitesParSerie)
+            ->nNbSeries(is_null($nombreSeries) ? count($quantitesParSerie) : $nombreSeries)
+            ->sQteparserie(implode(';', $quantitesParSerie))
             ->nIdClientAPI($this->config->cleAPI);
 
         $xml = $this->client->exec($method);
@@ -246,7 +245,7 @@ class SmartLabel
             $suivi->code = intval((string)$xmlEtat->Livraison_Etat);
             $suivi->trackingURL = (string)$xmlEtat->Livraison_Tracking_Adresse;
             $suivi->informationsLivraison = (string)$xmlEtat->livraison_Info;
-            
+
             $etats[$numeroDossier] = $suivi;
         }
 

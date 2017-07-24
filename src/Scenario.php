@@ -16,4 +16,15 @@ class Scenario
     public $delai;
     public $matiere;
     public $finition;
+
+    /**
+     * Scenario constructor.
+     * @param $numero
+     */
+    public function __construct($numero)
+    {
+        $this->numero = $numero;
+    }
+
+
 }
