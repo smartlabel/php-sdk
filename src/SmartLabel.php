@@ -293,7 +293,7 @@ class SmartLabel
         }
 
         if ($cls === 'Adesa\SmartLabelClient\Mandrin') {
-            return $this->translator->translate("finition/$objet->diametre");
+            return $this->translator->translate("mandrin/$objet->diametre");
         }
 
         if ($cls === 'Adesa\SmartLabelClient\Scenario') {
