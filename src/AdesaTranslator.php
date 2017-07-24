@@ -18,7 +18,7 @@ class AdesaTranslator
     private $config;
 
     private $_keys;
-    
+
     /**
      * AdesaTranslator constructor.
      * @param Config $config
@@ -28,20 +28,27 @@ class AdesaTranslator
         $this->config = $config;
     }
 
-    
-    private function keys(){
-        if(!isset($this->_keys)){
-            $handle = fopen($this->config->localeBasePath . DIRECTORY_SEPARATOR . $this->config->locale . '.csv', 'r');
-            while(($row = fgetcsv($handle, null, ';', '"')) !== false){
-                $this->_keys[$row[0]] = $row[1];
+
+    private function keys()
+    {
+        if (!isset($this->_keys)) {
+            $filename = $this->config->localeBasePath . DIRECTORY_SEPARATOR . $this->config->locale . '.csv';
+            $handle = fopen($filename, 'r');
+            if ($handle !== false) {
+                while (($row = fgetcsv($handle, null, ';', '"')) !== false) {
+                    $this->_keys[$row[0]] = $row[1];
+                }
+            } else {
+                throw new \Exception('no such file', $filename);
             }
         }
 
         return $this->_keys;
     }
-    
 
-    public function translate($key){
+
+    public function translate($key)
+    {
         $k = $this->keys();
         return isset($k[$key]) ? $k[$key] : $key;
     }

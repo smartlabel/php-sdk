@@ -296,6 +296,11 @@ class SmartLabel
             return $this->translator->translate("finition/$objet->diametre");
         }
 
+        if ($cls === 'Adesa\SmartLabelClient\Scenario') {
+            return $this->translator->translate("scenario/$objet->numero");
+        }
+
         return $cls;
     }
+
 }
