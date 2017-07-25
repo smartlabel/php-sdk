@@ -129,6 +129,21 @@ class SmartLabel
         return $scenario;
     }
 
+    /**
+     * @param \Adesa\SmartLabelClient\Scenario $scenario
+     * @param float $quantite
+     * @param float $hauteur en millimetres
+     * @param float $largeur en millimetres
+     * @param boolean $poseAutomatique
+     * @param Mandrin $mandrin
+     * @param int $nombreEtiquettesParRouleau
+     * @param int $nombreRouleaux
+     * @param int $rotation 0 ; 90 ; 180 ; 270
+     * @param int[] $quantitesParSerie
+     * @param int|null $nombreSeries
+     *
+     * @return Dossier
+     */
     public function demandePrix(
         $scenario,
         $quantite,
@@ -138,11 +153,80 @@ class SmartLabel
         $mandrin,
         $nombreEtiquettesParRouleau,
         $nombreRouleaux,
-        $rotation, /*0 ; 90 ; 180 ; 270*/
+        $rotation,
         $quantitesParSerie,
         $nombreSeries = null
     )
     {
+
+        $largeur = floatval($largeur);
+        $hauteur = floatval($hauteur);
+
+        $errors = [];
+
+        if ($quantite < 50) {
+            $errors[] = [
+                "parameter" => "nb_labels",
+                "value" => $quantite,
+                "expected" => "> 50"
+            ];
+        }
+
+        $nbSeries = is_null($nombreSeries) ? count($quantitesParSerie) : $nombreSeries;
+
+        if ($nbSeries > 10) {
+            $errors[] = [
+                "parameter" => "nb_versions",
+                "value" => $nbSeries,
+                "expected" => "< 11"
+            ];
+        }
+
+
+        if ($nbSeries < 1) {
+            $errors[] = [
+                "parameter" => "nb_versions",
+                "value" => $nbSeries,
+                "expected" => "> 0"
+            ];
+        }
+
+        if (($mandrin->diametre != 40) && ($mandrin->diametre != 76)) {
+            $errors[] = [
+                "parameter" => "core_size",
+                "value" => $mandrin->diametre,
+                "expected" => "40 || 76"
+            ];
+        }
+
+
+        if ($poseAutomatique){
+            $petitCote = ($rotation % 90 == 0) ? $hauteur : $largeur;
+            $grandCote = ($rotation % 90 == 0) ? $largeur : $hauteur;
+        } else {
+            $petitCote = min($hauteur, $largeur);
+            $grandCote = max($hauteur, $largeur);
+        }
+
+        if ($petitCote < 30 || $petitCote > 306){
+            $errors[] = [
+                "parameter" => "width",
+                "value" => $petitCote,
+                "expected" => "30..306"
+            ];
+        }
+
+        if ($grandCote < 15 || $grandCote > 450){
+            $errors[] = [
+                "parameter" => "height",
+                "value" => $grandCote,
+                "expected" => "15..450"
+            ];
+        }
+
+        if (!empty($errors)){
+            throw new InvalidParametersException($errors);
+        }
 
         $method = new DemandePrix();
         $method->nScenario($scenario->numero)
@@ -154,7 +238,7 @@ class SmartLabel
             ->nNbEtiqRouleaux($nombreEtiquettesParRouleau)
             ->nNbRouleaux($nombreRouleaux)
             ->nRotation($rotation)
-            ->nNbSeries(is_null($nombreSeries) ? count($quantitesParSerie) : $nombreSeries)
+            ->nNbSeries($nbSeries)
             ->sQteparserie(implode(';', $quantitesParSerie))
             ->nIdClientAPI($this->config->cleAPI);
 
