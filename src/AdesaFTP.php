@@ -46,7 +46,7 @@ class AdesaFTP
     public function upload($data, $destination)
     {
 
-        echo "Adesa UPLOAD $data ~> $destination \n";
+//        echo "Adesa UPLOAD $data ~> $destination \n";
         $pathinfo = pathinfo($destination);
         $parts = explode(DIRECTORY_SEPARATOR, $pathinfo['dirname']);
         $c = $this->getConnection();

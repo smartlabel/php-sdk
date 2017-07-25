@@ -143,6 +143,7 @@ class SmartLabel
         $nombreSeries = null
     )
     {
+
         $method = new DemandePrix();
         $method->nScenario($scenario->numero)
             ->nQuantite($quantite)

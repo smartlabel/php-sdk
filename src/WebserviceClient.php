@@ -9,7 +9,6 @@
 namespace Adesa\SmartLabelClient;
 
 
-
 class WebserviceClient
 {
 
@@ -29,7 +28,7 @@ class WebserviceClient
      * @var WebserviceMethod
      */
     public $lastMethod;
-    
+
 
     /**
      * Client constructor.
@@ -43,12 +42,12 @@ class WebserviceClient
 
     private function getSoapClient($wsdl)
     {
-        if(!isset($this->clients[$wsdl])){
-        $this->clients[$wsdl] = new \SoapClient($wsdl, array(
-            'trace' => 1,
-        ));
+        if (!isset($this->clients[$wsdl])) {
+            $this->clients[$wsdl] = new \SoapClient($wsdl, array(
+                'trace' => 1,
+            ));
         }
-        
+
         return $this->clients[$wsdl];
     }
 
@@ -64,27 +63,18 @@ class WebserviceClient
         $this->lastMethod = $method;
 
         $method->getParameters();
-        
-        try {
-            $result = $this->getSoapClient($method->getWSDL())->__soapCall(
-                $method->getName(),
-                $method->getParameters()
-            );
-        } catch (\Exception $exc) {
-            $asXML = false;
-            $result = false;
-            
-            echo PHP_EOL;
-            echo "========= SOAP ERROR ==========" . PHP_EOL;
-            var_export($method->getParameters());
-            $this->debug();
-        }
 
+        $result = $this->getSoapClient($method->getWSDL())->__soapCall(
+            $method->getName(),
+            $method->getParameters()
+        );
+        
         return ($asXML) ? simplexml_load_string($result) : $result;
     }
 
 
-    public function debug(){
+    public function debug()
+    {
         $client = $this->getSoapClient($this->lastMethod->getWSDL());
         echo $client->__getLastRequest();
         echo $client->__getLastResponse();
