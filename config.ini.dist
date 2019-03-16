@@ -7,3 +7,5 @@ cleAPI = {votre clé API}
 host = adesaweb.adesa.fr
 login = {votre identifiant revendeur}
 password = {votre mot de passe FTP}
+
+prod = true
