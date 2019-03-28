@@ -200,29 +200,29 @@ class SmartLabel
         }
 
 
-        if ($poseAutomatique){
-            $petitCote = ($rotation % 90 == 0) ? $hauteur : $largeur;
-            $grandCote = ($rotation % 90 == 0) ? $largeur : $hauteur;
-        } else {
-            $petitCote = min($hauteur, $largeur);
-            $grandCote = max($hauteur, $largeur);
-        }
-
-        if ($petitCote < 30 || $petitCote > 306){
-            $errors[] = [
-                "parameter" => "width",
-                "value" => $petitCote,
-                "expected" => "30..306"
-            ];
-        }
-
-        if ($grandCote < 15 || $grandCote > 450){
-            $errors[] = [
-                "parameter" => "height",
-                "value" => $grandCote,
-                "expected" => "15..450"
-            ];
-        }
+//        if ($poseAutomatique){
+//            $petitCote = ($rotation % 90 == 0) ? $hauteur : $largeur;
+//            $grandCote = ($rotation % 90 == 0) ? $largeur : $hauteur;
+//        } else {
+//            $petitCote = min($hauteur, $largeur);
+//            $grandCote = max($hauteur, $largeur);
+//        }
+//
+//        if ($petitCote < 30 || $petitCote > 306){
+//            $errors[] = [
+//                "parameter" => "width",
+//                "value" => $petitCote,
+//                "expected" => "30..306"
+//            ];
+//        }
+//
+//        if ($grandCote < 15 || $grandCote > 450){
+//            $errors[] = [
+//                "parameter" => "height",
+//                "value" => $grandCote,
+//                "expected" => "15..450"
+//            ];
+//        }
 
         if (!empty($errors)){
             throw new InvalidParametersException($errors);
