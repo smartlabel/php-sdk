@@ -164,13 +164,13 @@ class SmartLabel
 
         $errors = [];
 
-        if ($quantite < 50) {
+        /*if ($quantite < 25) {
             $errors[] = [
                 "parameter" => "nb_labels",
                 "value" => $quantite,
-                "expected" => "> 50"
+                "expected" => "> 25"
             ];
-        }
+        }*/
 
         $nbSeries = is_null($nombreSeries) ? count($quantitesParSerie) : $nombreSeries;
 
