@@ -1,7 +1,8 @@
 <?php
 
 //$wsdlCommande = "http://smartlabel.thetis.fr/SMARTLABEL_SERVICE_Web/SmartLabel_Service.awws?wsdl";
-$wsdlCommande = "http://srvadesa.vasy.xyz/API_SMARTLABEL_WEB/awws/API_Smartlabel.awws?wsdl";
+//$wsdlCommande = "https://srvcalc.adesa.fr/api_smartlabel_web/API_Smartlabel.awws?wsdl";
+$wsdlCommande = "https://srvcalc.adesa.fr/api_smartlabel_web/API_Smartlabel.awws?wsdl";
 $wsdlTransport = "http://srvadesa.vasy.xyz/SMARTLABEL_TRANSPORT_WS_WEB/SMARTLABEL_Transport_WS.awws?wsdl";
 $wsdlSuivi = "http://myadesaweb.fr/THETIS_ADESA_SERVICE_WEB//awws/THETIS_Adesa_Service.awws?wsdl";
 

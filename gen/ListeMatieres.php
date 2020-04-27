@@ -17,7 +17,7 @@ class ListeMatieres extends WebserviceMethod
 
     public function getWSDL()
     {
-        return 'http://srvadesa.vasy.xyz/API_SMARTLABEL_WEB/awws/API_Smartlabel.awws?wsdl';
+        return 'https://srvcalc.adesa.fr/api_smartlabel_web/API_Smartlabel.awws?wsdl';
     }
 
     public function getParametersList()
