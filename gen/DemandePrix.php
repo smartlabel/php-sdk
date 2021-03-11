@@ -17,7 +17,7 @@ class DemandePrix extends WebserviceMethod
 
     public function getWSDL()
     {
-        return 'https://srvcalc.adesa.fr/api_smartlabel_web/API_Smartlabel.awws?wsdl';
+        return 'https://srvsmart.adesa.fr/api_smartlabel_web/API_Smartlabel.awws?wsdl';
     }
 
     public function getParametersList()
